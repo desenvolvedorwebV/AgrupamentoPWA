@@ -437,6 +437,7 @@ nivelAtual = nivelSalvo !== null ? Math.min(parseInt(nivelSalvo), niveis.length 
       const todosFixos = tabuleiro.querySelectorAll('.palavra:not(.fixa)').length === 0;
       if (todosFixos && gruposFormados > 0) {
         setTimeout(() => {
+          localStorage.setItem('nivelAtual', nivelAtual + 1);
           nivelAtual++;
           if (nivelAtual < niveis.length) {
             alert(`Parabéns! Vamos para o nível ${nivelAtual + 1}!`);
