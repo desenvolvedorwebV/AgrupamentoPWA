@@ -317,6 +317,8 @@ function tempoEsgotado() {
   ];
 
     let nivelAtual = 0;
+    const nivelSalvo = localStorage.getItem('nivelAtual');
+nivelAtual = nivelSalvo !== null ? Math.min(parseInt(nivelSalvo), niveis.length - 1) : 0;
     let palavras = [];
 
     function embaralhar(array) {
