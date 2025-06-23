@@ -36,6 +36,363 @@
   <footer>&copy; 2025 Vinicius</footer>
 
   <script>
+
+function secondsToTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+    
+        return [
+            String(hours).padStart(2, '0'),
+            String(minutes).padStart(2, '0'),
+            String(secs).padStart(2, '0')
+        ].join(':');
+      }
+  
+      function timeToSeconds(time) {
+        const [hours, minutes, seconds] = time.split(':').map(Number);
+        return hours * 3600 + minutes * 60 + seconds;
+      }
+  
+      function startCronometro() {
+  const tempoElement = document.getElementById('tempo');
+
+  tempoInterval = setInterval(function () {
+    var tempo = timeToSeconds(tempoElement.innerHTML) - 1;
+
+    if (tempo <= 0) {
+      clearInterval(tempoInterval);
+      tempoElement.innerHTML = '00:00:00';
+      tempoEsgotado(); // Chama a função desejada ao terminar
+    } else {
+      tempoElement.innerHTML = secondsToTime(tempo);
+    }
+  }, 1000);
+
+  return tempoInterval;
+}
+
+// Exemplo da função que será chamada ao acabar o tempo
+function tempoEsgotado() {
+  alert("Tempo esgotado! O nível será reiniciado!");
+  iniciarNivel();
+}
+      tempoInterval = startCronometro();
+  
+    const niveis = [
+      {
+        respostas: [
+          ["suco", "chá", "leite", "café"],
+          ["azedo", "amargo", "doce", "picante"],
+          ["maçã", "kiwi", "banana", "laranja"],
+          ["cenoura", "brócolis", "batata", "repolho"],
+          ["hambúrguer", "taco", "pizza", "batata frita"],
+          ["bar", "bristô", "cafeteria", "lanchonete"]
+        ],
+        categorias: [
+          "Bebidas", "Sabores", "Frutas", "Vegetais", "Lanches", "Estabelecimentos"
+        ],
+        cores: [
+          "#8E24AA", "#039BE5", "#43A047", "#FFB300", "#E53935", "#6D4C41"
+        ]
+      },
+      {
+        respostas: [
+          ["lote", "preço", "item raro", "lance"],
+          ["marisco", "ostra", "lagosta", "caranguejo"],
+          ["nocaute", "cruzado", "luta", "árbitro"],
+          ["pequim", "londres", "chicago", "toronto"],
+          ["velocidade", "gravidade", "leis naturais", "energia"],
+          ["spitz alemão", "husky siberiano", "poodle", "buldogue"]
+        ],
+        categorias: [
+          "Leilões", "Frutos do Mar", "Lutas", "Cidades", "Física", "Cães"
+        ],
+        cores: [
+          "#3F51B5", "#009688", "#F44336", "#9C27B0", "#FF9800", "#607D8B"
+        ]
+      },
+      {
+        respostas: [
+          ["azul", "verde", "vermelho", "amarelo"],
+          ["cachorro", "gato", "papagaio", "hamster"],
+          ["martelo", "serrote", "chave inglesa", "alicate"],
+          ["carro", "ônibus", "bicicleta", "moto"],
+          ["maçã", "banana", "Limão", "uva"],
+          ["futebol", "basquete", "vôlei", "tênis"]
+        ],
+        categorias:
+        ["Cores","Estimação","Ferramentas","Transporte","Frutas","Esportes"],
+        cores:
+        ["#2196F3","#4CAF50", "#FF9800", "#9C27B0", "#F44336", "#3F51B5"]
+      },
+      {
+        respostas: [
+          ["caneta", "lápis", "borracha", "régua"],
+          ["violinista", "pianista", "guitarrista", "baterista"],
+          ["hotel", "hostel", "pousada", "albergue"],
+          ["tigre", "leão", "onça", "guepardo"],
+          ["frança", "alemanha", "itália", "espanha"],
+          ["instagram", "facebook", "X", "tiktok"]
+        ],
+        categorias: ["Escola","Músicos","Hospedagem","Felinos","Países","Redes Sociais"],
+        cores: ["#3F51B5","#FF5722", "#009688", "#9C27B0", "#CDDC39", "#E91E63"]
+      },
+      {
+        respostas: [
+          ["cavala", "truta", "salmão", "barracuda"],
+          ["inundação", "ciclone", "avalanche", "tsunami"],
+          ["omã", "jordânia", "líbano", "iêmen"],
+          ["tetris", "pong", "pinball", "galaga"],
+          ["sofá", "cadeira", "estante", "cômoda"],
+          ["lanterna", "rojões", "desfile", "dragão"]
+        ],
+        categorias: ["Peixes", "Fenômenos Naturais", "Oriente Médio", "Jogos Clássicos", "Móveis","Festival"],
+        cores: ["#1E88E5","#E53935","#8E24AA","#FDD835", "#6D4C41", "#00ACC1"]
+      },
+      {
+        respostas: [
+          ["io", "europa", "ganimedes", "calisto"],
+          ["mercúrio", "vênus", "terra", "marte"],
+          ["júpiter", "saturno", "urano", "netuno"],
+          ["asteróide", "cometa", "meteoro", "meteorito"],
+          ["eclipse solar", "eclipse lunar", "estrela cadente", "aurora boreal"],
+          ["sistema planetário", "galáxia", "aglomerado", "superaglomerado"]
+        ],
+        categorias: ['"Luas" de Júpiter',"Planetas Rochosos","Gigantes Gasosos","Corpos Celestes","Fenômenos Astronômicos","Estruturas do Universo"],
+        cores: ["#6A1B9A", "#D84315", "#0277BD", "#FDD835", "#00897B", "#5D4037"]
+      },
+  {
+  respostas: [
+    ["everest", "aconcágua", "denali", "kilimanjaro"],     // Montanhas Famosas
+    ["nilo", "amazonas", "yangtzé", "mississippi"],        // Rios Importantes
+    ["saara", "gobi", "atacama", "kalahari"],              // Desertos
+    ["brasil", "rússia", "canadá", "china"],               // Países Continentais
+    ["tokyo", "nova york", "londres", "paris"],            // Grandes Metrópoles
+    ["áfrica", "ásia", "europa", "oceania"]                // Continentes
+  ],
+  categorias: [
+    "Montanhas", 
+    "Rios", 
+    "Desertos", 
+    "Países Grandes", 
+    "Cidades Famosas", 
+    "Continentes"
+  ],
+  cores: [
+    "#2E7D32", "#1976D2", "#F4511E", "#6D4C41", "#C2185B", "#0288D1"
+  ]
+}
+  ];
+
+    let nivelAtual = 0;
+    let palavras = [];
+
+    function embaralhar(array) {
+      const copia = array.slice();
+      for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
+    }
+
+    function iniciarNivel() {
+      clearInterval(tempoInterval);
+      const tempoElement = document.getElementById('tempo');
+      tempoElement.innerHTML = "00:05:00";
+      tempoInterval = startCronometro();
+      
+      const nivel = niveis[nivelAtual];
+      palavras = embaralhar(nivel.respostas.flat());
+      const tabuleiro = document.getElementById('tabuleiro');
+      tabuleiro.innerHTML = "";
+
+      for (let i = 0; i < palavras.length; i += 4) {
+        const linha = document.createElement('div');
+        linha.classList.add('linha');
+
+        for (let j = 0; j < 4; j++) {
+          const palavra = palavras[i + j];
+          const div = document.createElement('div');
+          div.classList.add('palavra');
+          div.draggable = true;
+          div.textContent = palavra;
+          div.dataset.index = i + j;
+
+          div.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text/plain', e.target.dataset.index);
+          });
+
+          div.addEventListener('dragover', e => e.preventDefault());
+
+          div.addEventListener('drop', e => {
+            e.preventDefault();
+            const origemIndex = e.dataTransfer.getData('text/plain');
+            const origem = document.querySelector(`.palavra[data-index='${origemIndex}']`);
+            const destino = e.currentTarget;
+
+            if (!origem || origem === destino || origem.classList.contains('fixa') || destino.classList.contains('fixa')) return;
+
+            const temp = destino.textContent;
+            destino.textContent = origem.textContent;
+            origem.textContent = temp;
+
+            verificarAgrupamentos();
+          });
+
+          linha.appendChild(div);
+        }
+
+        tabuleiro.appendChild(linha);
+        //document.querySelector('#topo-funcoes .bloco-topo').textContent = `Nível ${nivelAtual + 1}`;
+          document.querySelector('#nivelQtd').value = nivelAtual + 1
+      }
+    }
+
+    function verificarAgrupamentos() {
+      const nivel = niveis[nivelAtual];
+      const tabuleiro = document.getElementById('tabuleiro');
+      const linhas = Array.from(tabuleiro.querySelectorAll('.linha'));
+      let gruposFormados = 0;
+
+      linhas.forEach((linha, indice) => {
+        const blocos = Array.from(linha.querySelectorAll('.palavra'));
+        const palavrasLinha = blocos.map(div => div.textContent);
+
+        nivel.respostas.forEach((grupo, gIndex) => {
+          const grupoOrdenado = grupo.slice().sort().join("-");
+          const linhaOrdenada = palavrasLinha.slice().sort().join("-");
+
+          if (grupoOrdenado === linhaOrdenada && !blocos[0].classList.contains('fixa')) {
+            const cor = nivel.cores[gIndex];
+            const categoriaNome = nivel.categorias[gIndex];
+
+            const grupoContainer = document.createElement('div');
+            grupoContainer.classList.add('grupo-fixo');
+            grupoContainer.style.borderColor = cor;
+            grupoContainer.style.backgroundColor = cor;
+
+            const abinha = document.createElement('div');
+            abinha.classList.add('categoria-abinha');
+            abinha.style.borderColor = cor;
+            abinha.style.backgroundColor = cor;
+            abinha.textContent = categoriaNome;
+
+            grupoContainer.appendChild(abinha);
+
+            const palavrasContainer = document.createElement('div');
+            palavrasContainer.classList.add('palavras-container');
+
+            blocos.forEach(div => {
+              div.classList.add('fixa');
+              div.style.cursor = 'default';
+              palavrasContainer.appendChild(div);
+            });
+
+            grupoContainer.appendChild(palavrasContainer);
+
+            tabuleiro.removeChild(linha);
+            tabuleiro.insertBefore(grupoContainer, tabuleiro.children[indice]);
+
+            gruposFormados++;
+          }
+        });
+      });
+
+      // Verifica se todos os grupos foram formados
+      const todosFixos = tabuleiro.querySelectorAll('.palavra:not(.fixa)').length === 0;
+      if (todosFixos && gruposFormados > 0) {
+        setTimeout(() => {
+          nivelAtual++;
+          if (nivelAtual < niveis.length) {
+            alert(`Parabéns! Vamos para o nível ${nivelAtual + 1}!`);
+            iniciarNivel();
+          } else {
+            alert("Parabéns! Você completou todos os níveis!");
+          }
+        }, 600);
+      }
+    }
+
+    function reiniciarNivel() {
+      iniciarNivel();
+    }
+
+    iniciarNivel();
+  
+  const inputNivel = document.getElementById('nivelQtd');
+
+inputNivel.addEventListener('input', (e) => {
+  // Permitir apenas números
+  e.target.value = e.target.value.replace(/\D/g, '');
+
+  // Ajustar altura e centralização se for > 9
+  const bloco = e.target.closest('.bloco-topo');
+  if (parseInt(e.target.value) > 9) {
+    inputNivel.style.height = '40px';
+    bloco.style.alignItems = 'center';
+    bloco.style.justifyContent = 'center';
+  } else {
+    inputNivel.style.height = '20px';
+    bloco.style.alignItems = 'center';
+    bloco.style.justifyContent = 'center';
+  }
+});
+
+inputNivel.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const numero = parseInt(inputNivel.value);
+    if (!isNaN(numero)) {
+      if (numero >= 1 && numero <= niveis.length) {
+        nivelAtual = numero - 1;
+        iniciarNivel();
+      } else {
+        alert("Nível inexistente!");
+        inputNivel.value = nivelAtual + 1; // restaura valor atual
+      }
+    }
+  }
+});
+  // Inicialmente, desativa o campo de input
+inputNivel.disabled = true;
+
+let sequenciaClique = [];
+const divNivel = document.querySelector("#nivelQtd").closest(".bloco-topo");
+const divRelogio = document.getElementById("tempo");
+
+function resetSequencia() {
+  sequenciaClique = [];
+}
+
+function verificarSequencia() {
+  const padrao = ['nivel', 'relogio', 'nivel', 'relogio'];
+  if (sequenciaClique.join(',') === padrao.join(',')) {
+    inputNivel.disabled = false;
+    alert("Campo de nível desbloqueado! Agora você consegue acessar o nível que desejar.");
+    resetSequencia();
+  }
+}
+
+divNivel.addEventListener('click', () => {
+  sequenciaClique.push('nivel');
+  if (sequenciaClique.length > 4) sequenciaClique.shift();
+  verificarSequencia();
+});
+
+divRelogio.addEventListener('click', () => {
+  sequenciaClique.push('relogio');
+  if (sequenciaClique.length > 4) sequenciaClique.shift();
+  verificarSequencia();
+});
+  
+  inputNivel.addEventListener('blur', () => {
+  const numero = parseInt(inputNivel.value);
+  if (isNaN(numero) || numero < 1 || numero > niveis.length || numero !== nivelAtual + 1) {
+    inputNivel.value = nivelAtual + 1;
+  }
+});
+    
     // Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
